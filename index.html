@@ -25,5 +25,47 @@
 
             <h2>Example Code</h2>
             <pre><code class="language-abap">
+CLASS zcl_my_restful_service DEFINITION
+  INHERITING FROM cl_http_server
+  FINAL
+  CREATE PUBLIC.
+  PUBLIC SECTION.
+    INTERFACES if_http_extension.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+CLASS zcl_my_restful_service IMPLEMENTATION.
+  METHOD if_http_extension~handle_request.
+    DATA lv_response TYPE string.
+    DATA lv_request TYPE string.
+    DATA lv_status TYPE i.
+    lv_request = server->request->get_request_body( ).
+    " Process the request and generate a response
+    lv_response = 'Hello, World!'.
+    lv_status = 200.
+    server->response->set_status( lv_status ).
+    server->response->set_header( 'Content-Type', 'application/json' ).
+    server->response->set_data( lv_response ).
+    server->response->send( ).
+  ENDMETHOD.
+ENDCLASS.
+            </code></pre>
+
+            <h2>Testing the Service</h2>
+            <p>You can test your RESTful service using tools like Postman or cURL. Make sure to set the appropriate HTTP method (GET, POST, etc.) and headers.</p>
+
+            <h2>Conclusion</h2>
+            <p>ABAP provides a powerful way to create RESTful services that can be consumed by various clients. By following the steps outlined in this guide, you can create your own RESTful services in ABAP.</p>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-abap.min.js"></script>
+        <script>
+            Prism.highlightAll();
+        </script>
+      
     </body>
 </html5>
