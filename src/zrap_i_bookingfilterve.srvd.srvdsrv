@@ -1,0 +1,4 @@
+@EndUserText.label: 'Booking Filter'
+define service ZRAP_I_BookingFilterVE {
+  expose ZRAP_C_BookingFilterVE as Booking;
+}
